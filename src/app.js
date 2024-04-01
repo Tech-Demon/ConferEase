@@ -10,6 +10,7 @@ const path = require('path')
 const Room = require('./Room')
 const Peer = require('./Peer')
 var mongoose = require("mongoose")
+const { log } = require('console')
 const options = {
   key: fs.readFileSync(path.join(__dirname,'..','ssl','key.pem'), 'utf-8'),
   cert: fs.readFileSync(path.join(__dirname,'..','ssl','cert.pem'), 'utf-8')
@@ -37,11 +38,12 @@ db.once('open',()=>console.log("Connected to Database"))
 
 
 //signin
-app.post("/sign_up",(req,res)=>{
-    var name = req.body.fullName;
-    var email = req.body.email;
-    var phno = req.body.phoneNumber;
-    var password = req.body.password;
+app.post("/sign_up",async(req,res)=>{
+  console.log(req.body);
+    var name = await req.body.fullName;
+    var email = await req.body.email;
+    var phno = await req.body.phoneNumber;
+    var password = await req.body.password;
     console.log(name);
     console.log(email);
 

@@ -15,17 +15,17 @@
   display: flex;
 } */
 
-.video {
+/* .video {
   flex: 0 1 auto;
   height: 80px;
   max-width: 500px;
   border-radius: 10px;
   cursor: pointer;
-}
+} */
 .screen {
   flex: 0 1 auto;
   height: 360px;
-  max-width: 500px;
+  max-width: 28vw;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -107,6 +107,21 @@ body {
       transform: translateX(1);
   }
 }
+.controls_2 {
+  position: fixed;
+  bottom: 20px; /* Adjust the distance from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row; /* Align buttons horizontally */
+  align-items: center;
+  justify-content: center;
+}
+
+.controls_2 button {
+  margin: 0 5px; /* Add some space between buttons */
+}
+
 
 .landing {
   display: flex;
@@ -142,31 +157,42 @@ body {
   border: none;
   margin: 5px;
   border-radius: 5px;
-  background-color: grey;
+  background-color: rgba(255, 255, 255, 0.15); /* Transparent background */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
   position: absolute;
   top: 20px;
   right: 20px;
   z-index: 999;
   font: inherit;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition effect */
 }
 
-#loginButton a {
-  color: white;
-  text-decoration: none;
+#loginButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background color on hover */
+  color: lightblue; /* Change text color on hover */
 }
 
-#loginButton a:hover {
-  color: lightblue;
-}
 #joinButton {
   padding: 10px 20px;
   margin: 5px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  background-color: grey;
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.15); /* Transparent background */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  color: black;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition effect */
 }
+
+#joinButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background color on hover */
+  color: grey; /* Change text color on hover */
+}
+
 .row {
   display: flex;
   /* align-items: center; */
@@ -174,7 +200,7 @@ body {
 .row1 {
   display: flex;
   align-items: center;
-  color: white;
+  color: black;
 }
 
 .row1 .fas {
@@ -183,6 +209,8 @@ body {
 .row i {
   margin-right: 10px; /* Add space between icon and text */
 }
+
+
 
 .row input[type="text"] {
   padding: 8px;
@@ -195,6 +223,8 @@ body {
 .col {
     display: flex; /* Use flexbox layout */
     align-items: center; /* Align items vertically in the center */
+    height: 70vh;
+    width : 90vw;
 }
 
 .controls_1  {
@@ -202,10 +232,57 @@ body {
   flex-direction: column;
   align-items: center; 
 }
-
-#joinButton:hover {
-  color: lightblue;
+.client {
+  align-content: center;
+  min-width: 60vw;
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  text-align: center; /* Align text in the center */
 }
+.video {
+ 
+  height: 80px;
+  max-width: 500px;
+  border-radius: 10px;
+  cursor: pointer;
+} 
+
+.Bttn {
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+.Bttn img {
+  height: 30px; /* Set the height of the image */
+}
+
+.Bttn:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+.host {
+  max-width: 500px;
+  border-radius: 10px;
+  align-content: center;
+  display: block;
+  flex-direction: column;
+  min-width: 30vw;
+  margin-left: 20px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 20px; 
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); 
+  text-align: center; 
+}
+
 
 .user_dev {
   display: flex;
@@ -218,7 +295,7 @@ body {
 
 
 .round-photo {
-  background-color: #fff;
+  /* background-color: #fff; */
   width: 550px; /* Adjust the width */
   height: 400px; /* Adjust the height */
   border-radius: 12%;
@@ -239,4 +316,221 @@ input[type="text"] {
   border-radius: 20px;
 }
 
+
+.controls_1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left side */
+  justify-content: center; /* Center items vertically */
+  height: 100vh; /* Adjust the height as needed */
+  margin: 0; /* Reset margin */
+  padding: 0; /* Reset padding */
+}
+
+.controls_1 button {
+  margin: 5px; /* Add some space between buttons */
+}
+
+
+
+
+
+
+
+
+#exitButton {
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#exitButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#exitButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+
+#copyButton{
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#copyButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#copyButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+
+
+#devicesButton{
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#devicesButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#devicesButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+#startAudioButton{
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#startAudioButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#startAudioButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+#startVideoButton{
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#startVideoButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#startVideoButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+#startScreenButton{
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#startScreenButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#startScreenButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+
+#stopScreenButton{
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#stopScreenButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#stopScreenButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+
+#stopVideoButton{
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#stopVideoButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#stopVideoButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+
+#stopAudioButton{
+  background-color: rgba(255, 255, 255, 0.15); /* Background color with transparency */
+  backdrop-filter: blur(10px); /* Apply backdrop blur effect */
+  border: none; /* Remove border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust padding as needed */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow for depth */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+#stopAudioButton img {
+  height: 30px; /* Set the height of the image */
+}
+
+#stopAudioButton:hover {
+  background-color: rgba(255, 255, 255, 0.25); /* Lighten the background on hover */
+}
+
+
+.dialog {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dialog-content {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+}
 

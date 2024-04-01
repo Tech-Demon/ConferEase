@@ -137,3 +137,11 @@ function enumerateDevices() {
     })
   )
 }
+
+document.getElementById("devicesButton").addEventListener("click", function() {
+  document.getElementById("dialog").style.display = "block";
+});
+
+document.querySelector(".close").addEventListener("click", function() {
+  document.getElementById("dialog").style.display = "none";
+});
