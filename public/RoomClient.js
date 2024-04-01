@@ -675,3 +675,15 @@ class RoomClient {
     })
   }
 }
+
+
+
+/* Cookies */
+
+function acceptCookies() {
+  console.log("Accepting cookies...");
+  document.getElementById('cookieCard').style.display = 'none';
+
+  var currentTime = new Date().getTime();
+  document.cookie = "cookieConsentTime=" + currentTime + "; expires=Thu, 31 Dec 2037 23:59:59 UTC; path=/";
+}

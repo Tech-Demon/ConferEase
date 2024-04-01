@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Already Exist</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .message {
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #f2dede;
+        color: #a94442;
+        border: 1px solid #ebccd1;
+        border-radius: 5px;
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+<script>
+    var seconds = 5; // Number of seconds before redirect
+    var countdownTimer = setInterval(function() {
+        document.getElementById("countdown").textContent = seconds;
+        seconds--;
+        if (seconds < 0) {
+            clearInterval(countdownTimer);
+            window.history.back(); // Redirect to login page after countdown finishes
+        }
+    }, 1000); // Update every 1 second
+</script>
+</head>
+<body>
+    <div class="message">
+        <h2>User Already Exist</h2>
+        <p>User already exist, try to signin with email</p>
+        <p>Redirecting in <span id="countdown">5</span> seconds...</p>
+        <button onclick="window.history.back();">Go Back</button>
+    </div>
+</body>
+</html>
