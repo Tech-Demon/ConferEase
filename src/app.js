@@ -11,6 +11,9 @@ const Room = require('./Room')
 const Peer = require('./Peer')
 var mongoose = require("mongoose")
 const { log } = require('console')
+var bodyParser = require("body-parser")
+
+
 const options = {
   key: fs.readFileSync(path.join(__dirname,'..','ssl','key.pem'), 'utf-8'),
   cert: fs.readFileSync(path.join(__dirname,'..','ssl','cert.pem'), 'utf-8')
@@ -24,8 +27,11 @@ const httpsServer = httpolyglot .createServer(options,app)
 const io = require('socket.io')(httpsServer)
 require('./socketController')(io)
 
-
+app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(bodyParser.urlencoded({
+  extended:true
+}))
 
 
 ///Mongodb//
@@ -38,94 +44,105 @@ db.once('open',()=>console.log("Connected to Database"))
 
 
 //signin
-app.post("/sign_up",async(req,res)=>{
-  console.log(req.body);
-    var name = await req.body.fullName;
-    var email = await req.body.email;
-    var phno = await req.body.phoneNumber;
-    var password = await req.body.password;
-    console.log(name);
-    console.log(email);
+app.post("/sign_up", async (req,res)=>{
+  var name = await req.body.fullName;
+  var email = await  req.body.email;
+  var phno = await  req.body.phoneNumber;
+  var password = await  req.body.password;
+  console.log(name);
+  console.log(email);
 
-    var data = {
-        "_id": email,
-        "name": name,
-        "email" : email,
-        "phno": phno,
-        "password" : password
-    }
+  var data = {
+      "_id": email,
+      "name": name,
+      "email" : email,
+      "phno": phno,
+      "password" : password
+  }
 
-    db.collection('users').findOne({ _id: email }, (err, doc) => {
-        if (err) throw err;
+  if(name != "" || email != "" || phno != "" || password != "")
+  {db.collection('users').findOne({ _id: email }, (err, doc) => {
+      if (err) throw err;
 
-        // Check if the document was found
-        if (doc) {
-          console.log('Document with ID ${email} found:', doc);
-        //   res.status(400).send({ message: 'User already exists!' });
-        // alert('Sign up successful!');
-        //   app.get('/alert', (req, res) => {
-        //     console.log('Alert')
-        //     res.send({ message: 'Hello, this is an alert!' });
-        // });
+      console.log(doc);
 
-        } else {
-          console.log('Document with ID ${email} not found.');
-          db.collection('users').insertOne(data,(err,collection)=>{
-            if(err){
-                throw err;
-            }
-            console.log("Record Inserted Successfully");
-            return res.redirect('signup_success.html')
-        });
-        }
+      // Check if the document was found
+      if (doc) {
+        console.log(`Document with ID ${email} found:`, doc);
+        return res.redirect('/error/userExist.html');
+      //   res.status(400).send({ message: 'User already exists!' });
+      //   app.get('/LoginAlert', (req, res) => {
+      //     console.log('Alert')
+      //     res.json({ message: 'User already exist !', type: 'signup' });
+      // });
 
-        // Close the connection
-        // client.close();
-
+      } else {
+        console.log(`Document with ID ${email} not found.`);
+        db.collection('users').insertOne(data,(err,collection)=>{
+          if(err){
+              throw err;
+          }
+          console.log("Record Inserted Successfully");
+          return res.redirect('index.html')
       });
+      }
 
-    // db.collection('users').insertOne(data,(err,collection)=>{
-    //     // if(err){
-    //     //     throw err;
-    //     // }
-    //     console.log("Record Inserted Successfully");
-    // });
-
-
+    });} else {
+      console.log('Not Accept');
+      // return res.redirect('signup_success.html');
+    }
 
 })
 
+
 app.post("/sign_in",(req,res)=>{
-    var email = req.body.email;
-    var password = req.body.password;
+  var email = req.body.email;
+  var password = req.body.password;
 
-    var data = {
-        "email" : email,
-        "password" : password
-    }
+  var data = {
+      "email" : email,
+      "password" : password
+  }
 
-    console.log(data)
-    db.collection('users').findOne({ _id: email }, (err, doc) => {
-        if (err) throw err;
-        // Check if the document was found
-        if (doc) {
-          console.log('Document with ID ${email} found:', doc);
-        } else {
-          console.log('Document with ID ${email} not found.');
+  console.log(data)
+  db.collection('users').findOne({ _id: email }, (err, doc) => {
+      if (err) throw err;
+      // Check if the document was found
+      if (doc) {
+        console.log(`Document with ID ${email} found:`, doc);
+        if(doc.password == data.password)
+        {
+          return res.redirect('index.html');
         }
-        // Close the connection
-        // client.close();
+        if(doc.password != data.password)
+        {
+          // app.get('/incorrectPass', (req, res) => {
+          //   console.log('Alert')
+          //   res.json({ message: 'Check your email or password' , type: 'login'});
+          // });
+          console.log('Incorrect Pass')
+          return res.redirect('/error/incoPass.html')
+        }
+      } else {
+        console.log(`Document with ID ${email} not found.`);
+        // app.get('/incorrectPass', (req, res) => {
+        //   console.log('Alert')
+        //   res.json({ message: 'Invalid email or password' });
+        // });
+        console.log('userNotExist')
+        return res.redirect('/error/userNotExist.html')
+      }
+      // Close the connection
+      // client.close();
 
-      });
+    });
 
-    // db.collection('users').insertOne(data,(err,collection)=>{
-    //     // if(err){
-    //     //     throw err;
-    //     // }
-    //     console.log("Record Inserted Successfully");
-    // });
-
-    return res.redirect('signup_success.html')
+  // db.collection('users').insertOne(data,(err,collection)=>{
+  //     // if(err){
+  //     //     throw err;
+  //     // }
+  //     console.log("Record Inserted Successfully");
+  // });
 
 })
 
