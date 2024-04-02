@@ -680,10 +680,43 @@ class RoomClient {
 
 /* Cookies */
 
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+}
+
 function acceptCookies() {
   console.log("Accepting cookies...");
-  document.getElementById('cookieCard').style.display = 'none';
+  document.getElementById('card').style.display = 'none';
 
-  var currentTime = new Date().getTime();
-  document.cookie = "cookieConsentTime=" + currentTime + "; expires=Thu, 31 Dec 2037 23:59:59 UTC; path=/";
+  const d = new Date();
+  d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = "cookieConsentTime=" + 'now' + ";" + expires + "; path=/";
+
+  let user = getCookie("userData");
+  if (user != "") {
+      document.getElementById('loginButton').innerHTML = `<button onclick="resetCookies()"><p>Hello, ${user}</p></button>`;
+      alert("Welcome again " + user);
+  }
+}
+
+
+function resetCookies() {
+  console.log("Resetting all cookies...");
+  const d = new Date();
+  d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = "userData=" + '' + ";" + expires + "; path=/";
 }
