@@ -11,11 +11,17 @@
         <script src="RoomClient.js"></script>
         <link href="modules/bootstrap.min.css" rel="stylesheet" />
         <script src="modules/bootstrap.bundle.min.js"></script>
-        <script>    if (window.location.pathname === './index.html') {
-            window.location.href = './login.html';
-        }</script>
+        <script>  
+            if (window.location.pathname !== '/login.html' && window.location.pathname !== '/index.html') {
+                console.log(window.location.pathname);
+                window.location.href = '/login.html';
+            }
+        </script>
+        
+        
     </head>
     <body>
+        
         <div>
             <div class="wave"></div>
             <div class="wave"></div>
