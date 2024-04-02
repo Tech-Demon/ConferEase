@@ -42,6 +42,7 @@ function roomOpen() {
   hide(stopScreenButton)
   reveal(exitButton)
   reveal(copyButton)
+  hide(cookieCard)
   reveal(devicesButton)
   control.className = ''
   // reveal(videoMedia)
